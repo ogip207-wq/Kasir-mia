@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#e91e63">
+<title>Rosea Kasir</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#fff5f8;
+  color:#333;
+}
+
+header{
+  background:linear-gradient(135deg,#e91e63,#ff6b9d);
+  color:white;
+  padding:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.header-content{
+  max-width:1200px;
+  margin:auto;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:bold;
+}
+
+.logo span{
+  display:block;
+  font-size:12px;
+  letter-spacing:2px;
+  margin-top:3px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:15px;
+}
+
+.search{
+  width:100%;
+  padding:14px;
+  border:1px solid #f1ccd9;
+  border-radius:12px;
+  font-size:16px;
+  outline:none;
+  margin-bottom:12px;
+}
+
+.search:focus{
+  border-color:#e91e63;
+}
+
+.categories{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:12px;
+}
+
+.categories button{
+  white-space:nowrap;
+  padding:10px 15px;
+  border-radius:25px;
+  border:1px solid #e91e63;
+  background:white;
+  color:#e91e63;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.categories button.active{
+  background:#e91e63;
+  color:white;
+}
+
+.main{
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:15px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:12px;
+}
+
+.product{
+  background:white;
+  border-radius:15px;
+  padding:14px;
+  border:1px solid #f2d8e1;
+  box-shadow:0 2px 7px rgba(0,0,0,.06);
+}
+
+.product h3{
+  margin:0 0 5px;
+  font-size:17px;
+}
+
+.product-category{
+  font-size:11px;
+  color:#999;
+  margin-bottom:10px;
+}
+
+.price-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.price-buttons button{
+  border:0;
+  border-radius:9px;
+  background:#ffe1eb;
+  color:#c2185b;
+  padding:8px 10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.price-buttons button:hover{
+  background:#e91e63;
+  color:white;
+}
+
+.cart-panel{
+  background:white;
+  border:1px solid #f2d8e1;
+  border-radius:15px;
+  padding:15px;
+  height:max-content;
+  position:sticky;
+  top:100px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.cart-title{
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.cart-items{
+  max-height:330px;
+  overflow-y:auto;
+}
+
+.empty{
+  text-align:center;
+  color:#999;
+  padding:30px 10px;
+}
+
+.cart-item{
+  border-bottom:1px solid #eee;
+  padding:10px 0;
+}
+
+.cart-item-name{
+  font-weight:bold;
+}
+
+.cart-item-info{
+  font-size:12px;
+  color:#888;
+  margin-top:3px;
+}
+
+.cart-item-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:7px;
+}
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.qty button{
+  border:0;
+  width:30px;
+  height:30px;
+  border-radius:8px;
+  background:#f8d5e1;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.total{
+  border-top:2px solid #eee;
+  margin-top:10px;
+  padding-top:12px;
+  font-size:22px;
+  font-weight:bold;
+  color:#e91e63;
+}
+
+.payment{
+  margin-top:12px;
+}
+
+.payment label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+.payment input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:16px;
+}
+
+.change{
+  margin-top:10px;
+  padding:12px;
+  border-radius:10px;
+  background:#f8f4f6;
+  font-weight:bold;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  padding:13px;
+  border-radius:10px;
+  margin-top:8px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn-primary{
+  background:#e91e63;
+  color:white;
+}
+
+.btn-primary:hover{
+  background:#c2185b;
+}
+
+.btn-secondary{
+  background:#f0e8eb;
+  color:#555;
+}
+
+.btn-green{
+  background:#159957;
+  color:white;
+}
+
+.history-section{
+  margin-top:20px;
+  display:none;
+}
+
+.history-section.show{
+  display:block;
+}
+
+.history-box{
+  background:white;
+  border-radius:15px;
+  border:1px solid #f2d8e1;
+  padding:15px;
+}
+
+.history-item{
+  border:1px solid #eee;
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:8px;
+}
+
+.history-header{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.history-items{
+  color:#777;
+  font-size:13px;
+  margin:7px 0;
+}
+
+.history-total{
+  font-weight:bold;
+  color:#e91e63;
+}
+
+.history-buttons{
+  display:flex;
+  gap:8px;
+  margin-bottom:10px;
+}
+
+.history-buttons button{
+  flex:1;
+  padding:11px;
+  border:0;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.receipt{
+  display:none;
+}
+
+@media(max-width:800px){
+  .main{
+    grid-template-columns:1fr;
+  }
+
+  .cart-panel{
+    position:static;
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:420px){
+  .products{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .product{
+    padding:10px;
+  }
+
+  .product h3{
+    font-size:15px;
+  }
+
+  .price-buttons button{
+    font-size:11px;
+    padding:7px;
+  }
+}
+
+@media print{
+  body *{
+    visibility:hidden;
+  }
+
+  #receipt,
+  #receipt *{
+    visibility:visible;
+  }
+
+  #receipt{
+    display:block !important;
+    position:absolute;
+    left:0;
+    top:0;
+    width:280px;
+    padding:10px;
+    font-family:monospace;
+    color:#000;
+    background:#fff;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="logo">
+      🌹 ROSEA
+      <span>JUICE & DRINK • KASIR</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <input
+    type="text"
+    id="search"
+    class="search"
+    placeholder="🔎 Cari menu..."
+  >
+
+  <div id="categories" class="categories"></div>
+
+  <div class="main">
+
+    <div>
+      <div id="products" class="products"></div>
+    </div>
+
+    <div class="cart-panel">
+
+      <div class="cart-title">
+        🛒 Pesanan
+      </div>
+
+      <div id="cartItems" class="cart-items">
+        <div class="empty">
+          Belum ada pesanan
+        </div>
+      </div>
+
+      <div class="total">
+        Total:
+        <span id="total">Rp0</span>
+      </div>
+
+      <div class="payment">
+
+        <label>
+          💵 Uang Pembayaran
+        </label>
+
+        <input
+          type="number"
+          id="payment"
+          placeholder="Masukkan uang pelanggan"
+          min="0"
+        >
+
+      </div>
+
+      <div class="change">
+        💰 Kembalian:
+        <span id="change">Rp0</span>
+      </div>
+
+      <button
+        class="btn btn-primary"
+        onclick="payAndPrint()"
+      >
+        🧾 BAYAR & CETAK STRUK
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        onclick="clearCart()"
+      >
+        🗑️ KOSONGKAN PESANAN
+      </button>
+
+      <button
+        class="btn btn-green"
+        onclick="showHistory()"
+      >
+        📋 RIWAYAT TRANSAKSI
+      </button>
+
+    </div>
+
+  </div>
+
+  <section
+    id="historySection"
+    class="history-section"
+  >
+
+    <div class="history-box">
+
+      <div class="history-buttons">
+
+        <button
+          onclick="hideHistory()"
+          style="background:#eee"
+        >
+          ← Kembali ke Kasir
+        </button>
+
+        <button
+          onclick="exportCSV()"
+          style="background:#159957;color:white"
+        >
+          📊 Export Excel
+        </button>
+
+        <button
+          onclick="deleteHistory()"
+          style="background:#ffdddd;color:#b00000"
+        >
+          🗑️ Hapus
+        </button>
+
+      </div>
+
+      <h2>📋 Riwayat Transaksi</h2>
+
+      <div id="historyList"></div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<div id="receipt"></div>
+
+<script>
+
+/* =========================
+   DATA MENU ROSEA
+========================= */
+
+const menu = [
+
+  ["Teh Original","TEA",{"Besar":5000}],
+  ["Teh Hijau","TEA",{"Besar":5000}],
+  ["Teh Susu","TEA",{"Kecil":5000,"Besar":8000}],
+  ["Teh Tarik","TEA",{"Kecil":6000,"Besar":8000}],
+  ["Teh Kurma","TEA",{"Kecil":6000,"Besar":10000}],
+  ["Lemon Tea","TEA",{"Kecil":6000,"Besar":10000}],
+  ["Apple Tea","TEA",{"Kecil":5000,"Besar":10000}],
+  ["Markisa Tea","TEA",{"Kecil":5000,"Besar":8000}],
+  ["Lecy Tea","TEA",{"Kecil":5000,"Besar":8000}],
+  ["Strawberry Tea","TEA",{"Kecil":5000,"Besar":8000}],
+
+  ["Thai Tea","MILK & FLAVOR",{"Kecil":8000,"Besar":10000}],
+  ["Chocolate","MILK & FLAVOR",{"Kecil":8000,"Besar":10000}],
+  ["Matcha","MILK & FLAVOR",{"Kecil":8000,"Besar":10000}],
+  ["Taro","MILK & FLAVOR",{"Kecil":8000,"Besar":10000}],
+  ["Red Velvet","MILK & FLAVOR",{"Kecil":10000,"Besar":8000}],
+  ["Coffee Gula Aren","MILK & FLAVOR",{"Besar":10000}],
+  ["Extra Joss Susu","MILK & FLAVOR",{"Kecil":6000,"Besar":10000}],
+  ["Kuku Bima Susu","MILK & FLAVOR",{"Kecil":6000,"Besar":10000}],
+  ["Milo","MILK & FLAVOR",{"Normal":10000}],
+  ["Nescafé + Milo","MILK & FLAVOR",{"Normal":10000}],
+  ["Nescafé Americano","MILK & FLAVOR",{"Normal":8000}],
+  ["Nescafé Gula Aren","MILK & FLAVOR",{"Normal":10000}],
+  ["Boba Brown Sugar","MILK & FLAVOR",{"Normal":10000}],
+
+  ["Jeruk Yakult","SEGAR & TRADISIONAL",{"Normal":10000}],
+  ["Jeruk Peras","SEGAR & TRADISIONAL",{"Kecil":5000,"Besar":10000}],
+  ["Es Jagung Hawai","SEGAR & TRADISIONAL",{"Kecil":7000,"Besar":10000}],
+  ["Cappuccino Cincau","SEGAR & TRADISIONAL",{"Kecil":7000,"Besar":10000}],
+  ["Dawet Gula Aren","SEGAR & TRADISIONAL",{"Kecil":7000,"Besar":10000}],
+  ["Cincau Gula Aren","SEGAR & TRADISIONAL",{"Kecil":7000,"Besar":10000}],
+
+  ["Alpukat Kocok","KOCOK",{"Normal":12000}],
+  ["Naga Kocok","KOCOK",{"Normal":12000}],
+
+  ["Jus Alpukat","JUICE",{"Kecil":9000,"Besar":14000}],
+  ["Jus Naga","JUICE",{"Kecil":8000,"Besar":13000}],
+  ["Jus Mangga","JUICE",{"Kecil":8000,"Besar":13000}],
+  ["Jus Strawberry","JUICE",{"Kecil":8000,"Besar":13000}],
+  ["Jus Melon","JUICE",{"Kecil":7000,"Besar":12000}],
+  ["Jus Semangka","JUICE",{"Kecil":7000,"Besar":12000}],
+  ["Jus Apel","JUICE",{"Kecil":8000,"Besar":12000}]
+
+];
+
+
+/* =========================
+   VARIABEL
+========================= */
+
+let cart = [];
+
+let currentCategory = "SEMUA";
+
+const search =
+  document.getElementById("search");
+
+const categories =
+  document.getElementById("categories");
+
+const products =
+  document.getElementById("products");
+
+const cartItems =
+  document.getElementById("cartItems");
+
+const totalElement =
+  document.getElementById("total");
+
+const payment =
+  document.getElementById("payment");
+
+const changeElement =
+  document.getElementById("change");
+
+const historySection =
+  document.getElementById("historySection");
+
+const historyList =
+  document.getElementById("historyList");
+
+const receipt =
+  document.getElementById("receipt");
+
+
+/* =========================
+   FORMAT RUPIAH
+========================= */
+
+function rupiah(number){
+
+  return new Intl.NumberFormat(
+    "id-ID",
+    {
+      style:"currency",
+      currency:"IDR",
+      maximumFractionDigits:0
+    }
+  ).format(number);
+
+}
+
+
+/* =========================
+   KATEGORI
+========================= */
+
+function renderCategories(){
+
+  const categoriesList = [
+    "SEMUA",
+    ...new Set(
+      menu.map(item => item[1])
+    )
+  ];
+
+  categories.innerHTML =
+    categoriesList.map(category => `
+
+      <button
+        class="${category === currentCategory ? "active" : ""}"
+        onclick="selectCategory('${category}')"
+      >
+        ${category}
+      </button>
+
+    `).join("");
+
+}
+
+
+function selectCategory(category){
+
+  currentCategory = category;
+
+  renderCategories();
+
+  renderProducts();
+
+}
+
+
+/* =========================
+   TAMPILKAN MENU
+========================= */
+
+function renderProducts(){
+
+  const keyword =
+    search.value.toLowerCase().trim();
+
+  const filtered =
+    menu.filter(item => {
+
+      const name =
+        item[0].toLowerCase();
+
+      const category =
+        item[1];
+
+      const categoryMatch =
+        currentCategory === "SEMUA" ||
+        category === currentCategory;
+
+      const searchMatch =
+        name.includes(keyword);
+
+      return categoryMatch && searchMatch;
+
+    });
+
+
+  if(filtered.length === 0){
+
+    products.innerHTML = `
+      <div class="empty">
+        Menu tidak ditemukan.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  products.innerHTML =
+    filtered.map(item => {
+
+      const name = item[0];
+
+      const category = item[1];
+
+      const prices = item[2];
+
+      const buttons =
+        Object.entries(prices)
+        .map(([size,price]) => `
+
+          <button
+            onclick="addToCart(
+              '${escapeQuotes(name)}',
+              '${size}',
+              ${price}
+            )"
+          >
+            ${size === "Normal" ? "" : size + " "}
+            ${rupiah(price)}
+          </button>
+
+        `).join("");
+
+
+      return `
+
+        <div class="product">
+
+          <div class="product-category">
+            ${category}
+          </div>
+
+          <h3>
+            ${name}
+          </h3>
+
+          <div class="price-buttons">
+            ${buttons}
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+function escapeQuotes(text){
+
+  return text
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+
+}
+
+
+/* =========================
+   TAMBAH KE KERANJANG
+========================= */
+
+function addToCart(
+  name,
+  size,
+  price
+){
+
+  const existing =
+    cart.find(
+      item =>
+        item.name === name &&
+        item.size === size
+    );
+
+
+  if(existing){
+
+    existing.quantity++;
+
+  }else{
+
+    cart.push({
+
+      name:name,
+      size:size,
+      price:price,
+      quantity:1
+
+    });
+
+  }
+
+
+  renderCart();
+
+}
+
+
+/* =========================
+   UBAH JUMLAH
+========================= */
+
+function changeQuantity(
+  index,
+  amount
+){
+
+  cart[index].quantity += amount;
+
+
+  if(cart[index].quantity <= 0){
+
+    cart.splice(index,1);
+
+  }
+
+
+  renderCart();
+
+}
+
+
+/* =========================
+   HITUNG TOTAL
+========================= */
+
+function getTotal(){
+
+  return cart.reduce(
+    (sum,item) =>
+      sum + item.price * item.quantity,
+    0
+  );
+
+}
+
+
+/* =========================
+   TAMPILKAN KERANJANG
+========================= */
+
+function renderCart(){
+
+  if(cart.length === 0){
+
+    cartItems.innerHTML = `
+      <div class="empty">
+        Belum ada pesanan
+      </div>
+    `;
+
+  }else{
+
+    cartItems.innerHTML =
+      cart.map((item,index) => `
+
+        <div class="cart-item">
+
+          <div class="cart-item-name">
+            ${item.name}
+          </div>
+
+          <div class="cart-item-info">
+            ${item.size} × ${rupiah(item.price)}
+          </div>
+
+          <div class="cart-item-bottom">
+
+            <div>
+              <strong>
+                ${rupiah(
+                  item.price *
+                  item.quantity
+                )}
+              </strong>
+            </div>
+
+            <div class="qty">
+
+              <button
+                onclick="changeQuantity(${index},-1)"
+              >
+                −
+              </button>
+
+              <strong>
+                ${item.quantity}
+              </strong>
+
+              <button
+                onclick="changeQuantity(${index},1)"
+              >
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  totalElement.textContent =
+    rupiah(getTotal());
+
+  calculateChange();
+
+}
+
+
+/* =========================
+   KEMBALIAN
+========================= */
+
+function calculateChange(){
+
+  const total =
+    getTotal();
+
+  const paid =
+    Number(payment.value || 0);
+
+  const change =
+    paid - total;
+
+
+  changeElement.textContent =
+    rupiah(
+      change > 0 ? change : 0
+    );
+
+}
+
+
+payment.addEventListener(
+  "input",
+  calculateChange
+);
+
+
+/* =========================
+   KOSONGKAN
+========================= */
+
+function clearCart(){
+
+  if(cart.length === 0){
+
+    return;
+
+  }
+
+
+  if(
+    confirm(
+      "Kosongkan semua pesanan?"
+    )
+  ){
+
+    cart = [];
+
+    payment.value = "";
+
+    renderCart();
+
+  }
+
+}
+
+
+/* =========================
+   BAYAR
+========================= */
+
+function payAndPrint(){
+
+  if(cart.length === 0){
+
+    alert(
+      "Pesanan masih kosong."
+    );
+
+    return;
+
+  }
+
+
+  const total =
+    getTotal();
+
+  const paid =
+    Number(payment.value || 0);
+
+
+  if(paid < total){
+
+    alert(
+      "Uang pembayaran kurang " +
+      rupiah(total - paid)
+    );
+
+    return;
+
+  }
+
+
+  const transaction = {
+
+    id:Date.now(),
+
+    date:new Date()
+      .toLocaleString("id-ID"),
+
+    items:cart.map(
+      item => ({
+        ...item
+      })
+    ),
+
+    total:total,
+
+    paid:paid,
+
+    change:paid-total
+
+  };
+
+
+  saveTransaction(
+    transaction
+  );
+
+
+  printReceipt(
+    transaction
+  );
+
+
+  cart = [];
+
+  payment.value = "";
+
+  renderCart();
+
+}
+
+
+/* =========================
+   SIMPAN TRANSAKSI
+========================= */
+
+function getHistory(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "rosea_transactions"
+    ) || "[]"
+  );
+
+}
+
+
+function saveTransaction(
+  transaction
+){
+
+  const history =
+    getHistory();
+
+  history.unshift(
+    transaction
+  );
+
+  localStorage.setItem(
+    "rosea_transactions",
+    JSON.stringify(history)
+  );
+
+}
+
+
+/* =========================
+   CETAK STRUK
+========================= */
+
+function printReceipt(
+  transaction
+){
+
+  const itemsHTML =
+    transaction.items.map(
+      item => `
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          margin-bottom:5px;
+        ">
+
+          <span>
+            ${item.name}<br>
+            ${item.size} x ${item.quantity}
+          </span>
+
+          <span>
+            ${rupiah(
+              item.price *
+              item.quantity
+            )}
+          </span>
+
+        </div>
+
+      `
+    ).join("");
+
+
+  receipt.innerHTML = `
+
+    <div style="
+      text-align:center;
+      font-weight:bold;
+      font-size:20px;
+    ">
+      ROSEA
+    </div>
+
+    <div style="
+      text-align:center;
+      font-size:12px;
+    ">
+      JUICE & DRINK
+    </div>
+
+    <hr>
+
+    <div style="
+      font-size:12px;
+      margin-bottom:10px;
+    ">
+      ${transaction.date}
+    </div>
+
+    ${itemsHTML}
+
+    <hr>
+
+    <div>
+      TOTAL :
+      <strong>
+        ${rupiah(transaction.total)}
+      </strong>
+    </div>
+
+    <div>
+      BAYAR :
+      ${rupiah(transaction.paid)}
+    </div>
+
+    <div>
+      KEMBALI :
+      ${rupiah(transaction.change)}
+    </div>
+
+    <hr>
+
+    <div style="
+      text-align:center;
+      margin-top:10px;
+    ">
+      Terima kasih 🌹
+      <br>
+      Selamat menikmati
+    </div>
+
+  `;
+
+
+  window.print();
+
+}
+
+
+/* =========================
+   RIWAYAT
+========================= */
+
+function showHistory(){
+
+  document.querySelector(
+    ".main"
+  ).style.display = "none";
+
+  historySection.classList.add(
+    "show"
+  );
+
+  renderHistory();
+
+}
+
+
+function hideHistory(){
+
+  historySection.classList.remove(
+    "show"
+  );
+
+  document.querySelector(
+    ".main"
+  ).style.display = "grid";
+
+}
+
+
+/* =========================
+   TAMPILKAN RIWAYAT
+========================= */
+
+function renderHistory(){
+
+  const history =
+    getHistory();
+
+
+  if(history.length === 0){
+
+    historyList.innerHTML = `
+      <div class="empty">
+        Belum ada transaksi.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  historyList.innerHTML =
+    history.map(
+      (transaction,index) => `
+
+        <div class="history-item">
+
+          <div class="history-header">
+
+            <strong>
+              Transaksi #${history.length-index}
+            </strong>
+
+            <span>
+              ${transaction.date}
+            </span>
+
+          </div>
+
+
+          <div class="history-items">
+
+            ${transaction.items.map(
+              item =>
+                `${item.name}
+                (${item.size})
+                ×${item.quantity}`
+            ).join("<br>")}
+
+          </div>
+
+
+          <div>
+            Total:
+            <strong class="history-total">
+              ${rupiah(transaction.total)}
+            </strong>
+          </div>
+
+          <div class="history-items">
+
+            Bayar:
+            ${rupiah(transaction.paid)}
+            <br>
+
+            Kembalian:
+            ${rupiah(transaction.change)}
+
+          </div>
+
+          <button
+            class="btn btn-primary"
+            onclick="reprint(${transaction.id})"
+          >
+            🧾 Cetak Ulang
+          </button>
+
+        </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================
+   CETAK ULANG
+========================= */
+
+function reprint(id){
+
+  const transaction =
+    getHistory().find(
+      item => item.id === id
+    );
+
+
+  if(transaction){
+
+    printReceipt(
+      transaction
+    );
+
+  }
+
+}
+
+
+/* =========================
+   HAPUS RIWAYAT
+========================= */
+
+function deleteHistory(){
+
+  const history =
+    getHistory();
+
+
+  if(history.length === 0){
+
+    alert(
+      "Belum ada riwayat transaksi."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    confirm(
+      "Hapus SEMUA riwayat transaksi?"
+    )
+  ){
+
+    localStorage.removeItem(
+      "rosea_transactions"
+    );
+
+    renderHistory();
+
+  }
+
+}
+
+
+/* =========================
+   EXPORT EXCEL / CSV
+========================= */
+
+function exportCSV(){
+
+  const history =
+    getHistory();
+
+
+  if(history.length === 0){
+
+    alert(
+      "Belum ada transaksi untuk diekspor."
+    );
+
+    return;
+
+  }
+
+
+  let rows = [
+
+    [
+      "Tanggal",
+      "Menu",
+      "Ukuran",
+      "Jumlah",
+      "Harga",
+      "Subtotal",
+      "Total Transaksi",
+      "Bayar",
+      "Kembalian"
+    ]
+
+  ];
+
+
+  history.forEach(
+    transaction => {
+
+      transaction.items.forEach(
+        item => {
+
+          rows.push([
+
+            transaction.date,
+
+            item.name,
+
+            item.size,
+
+            item.quantity,
+
+            item.price,
+
+            item.price *
+              item.quantity,
+
+            transaction.total,
+
+            transaction.paid,
+
+            transaction.change
+
+          ]);
+
+        }
+      );
+
+    }
+  );
+
+
+  const csv =
+    "\uFEFF" +
+    rows.map(
+      row =>
+        row.map(
+          value =>
+            `"${String(value)
+              .replace(/"/g,'""')}"`
+        ).join(",")
+    ).join("\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:
+          "text/csv;charset=utf-8;"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    "Rosea_Riwayat_Transaksi.csv";
+
+  document.body.appendChild(
+    link
+  );
+
+  link.click();
+
+  document.body.removeChild(
+    link
+  );
+
+  URL.revokeObjectURL(url);
+
+}
+
+
+/* =========================
+   PENCARIAN
+========================= */
+
+search.addEventListener(
+  "input",
+  renderProducts
+);
+
+
+/* =========================
+   MULAI APLIKASI
+========================= */
+
+renderCategories();
+
+renderProducts();
+
+renderCart();
+
+</script>
+
+</body>
+</html>
